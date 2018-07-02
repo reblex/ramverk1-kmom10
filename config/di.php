@@ -2,6 +2,7 @@
 /**
  * Configuration file for DI container.
  */
+
 return [
 
     // Services to add to the container.
@@ -9,14 +10,13 @@ return [
         "request" => [
             "shared" => true,
             "callback" => function () {
-                $obj = new \Anax\Request\Request();
-                $obj->init();
-                return $obj;
+                $request = new \Anax\Request\Request();
+                $request->init();
+                return $request;
             }
         ],
         "response" => [
             "shared" => true,
-            //"callback" => "\Anax\Response\Response",
             "callback" => function () {
                 $obj = new \Anax\Response\ResponseUtility();
                 $obj->setDI($this);
@@ -26,85 +26,62 @@ return [
         "url" => [
             "shared" => true,
             "callback" => function () {
-                $obj = new \Anax\Url\Url();
+                $url = new \Anax\Url\Url();
                 $request = $this->get("request");
-                $obj->setSiteUrl($request->getSiteUrl());
-                $obj->setBaseUrl($request->getBaseUrl());
-                $obj->setStaticSiteUrl($request->getSiteUrl());
-                $obj->setStaticBaseUrl($request->getBaseUrl());
-                $obj->setScriptName($request->getScriptName());
-                $obj->configure("url.php");
-                $obj->setDefaultsFromConfiguration();
-                return $obj;
+                $url->setSiteUrl($request->getSiteUrl());
+                $url->setBaseUrl($request->getBaseUrl());
+                $url->setStaticSiteUrl($request->getSiteUrl());
+                $url->setStaticBaseUrl($request->getBaseUrl());
+                $url->setScriptName($request->getScriptName());
+                $url->configure("url.php");
+                $url->setDefaultsFromConfiguration();
+                return $url;
             }
         ],
         "router" => [
             "shared" => true,
             "callback" => function () {
-                $obj = new \Anax\Route\Router();
-                $obj->setDI($this);
-                $obj->configure("route.php");
-                return $obj;
+                $router = new \Anax\Route\Router();
+                $router->setDI($this);
+                $router->configure("route2.php");
+                return $router;
             }
         ],
         "view" => [
             "shared" => true,
             "callback" => function () {
-                $obj = new \Anax\View\ViewCollection();
-                $obj->setDI($this);
-                $obj->configure("view.php");
-                return $obj;
+                $view = new \Anax\View\ViewCollection();
+                $view->setDI($this);
+                $view->configure("view.php");
+                return $view;
             }
         ],
         "viewRenderFile" => [
             "shared" => true,
             "callback" => function () {
-                $obj = new \Anax\View\ViewRenderFile2();
-                $obj->setDI($this);
-                return $obj;
+                $viewRender = new \Anax\View\ViewRenderFile2();
+                $viewRender->setDI($this);
+                return $viewRender;
             }
         ],
         "session" => [
             "shared" => true,
+            "active" => true,
             "callback" => function () {
-                $obj = new \Anax\Session\SessionConfigurable();
-                $obj->configure("session.php");
-                $obj->start();
-                return $obj;
+                $session = new \Anax\Session\SessionConfigurable();
+                $session->configure("session.php");
+                $session->start();
+                return $session;
             }
         ],
         "textfilter" => [
             "shared" => true,
             "callback" => "\Anax\TextFilter\TextFilter",
         ],
-        "pageRender" => [
-            "shared" => true,
-            "callback" => function () {
-                $obj = new \Anax\Page\PageRender();
-                $obj->setDI($this);
-                return $obj;
-            }
-        ],
-        "page" => [
-            "shared" => true,
-            "callback" => function () {
-                $obj = new \Anax\Page\Page();
-                $obj->setDI($this);
-                return $obj;
-            }
-        ],
         "errorController" => [
             "shared" => true,
             "callback" => function () {
                 $obj = new \Anax\Page\ErrorController();
-                $obj->setDI($this);
-                return $obj;
-            }
-        ],
-        "developController" => [
-            "shared" => true,
-            "callback" => function () {
-                $obj = new \Anax\Page\DevelopController();
                 $obj->setDI($this);
                 return $obj;
             }
@@ -121,6 +98,38 @@ return [
             "shared" => true,
             "callback" => function () {
                 $obj = new \Anax\Page\FlatFileContentController();
+                $obj->setDI($this);
+                return $obj;
+            }
+        ],
+        "pageRender" => [
+            "shared" => true,
+            "callback" => function () {
+                $obj = new \Anax\Page\PageRender();
+                $obj->setDI($this);
+                return $obj;
+            }
+        ],
+        "commentController" => [
+            "shared" => true,
+            "callback" => function () {
+                $obj = new reblex\Comment\CommentController();
+                $obj->setDI($this);
+                return $obj;
+            }
+        ],
+        "db" => [
+            "shared" => true,
+            "callback" => function () {
+                $obj = new Anax\Database\DatabaseQueryBuilder();
+                $obj->configure("database.php");
+                return $obj;
+            }
+        ],
+        "userController" => [
+            "shared" => true,
+            "callback" => function () {
+                $obj = new \reblex\User\UserController();
                 $obj->setDI($this);
                 return $obj;
             }

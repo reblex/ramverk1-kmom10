@@ -33,6 +33,16 @@ return [
             "file" => __DIR__ . "/route/flat-file-content.php",
         ],
         [
+            // To read flat file content in Markdown from content/
+            "mount" => null,
+            "file" => __DIR__ . "/route/comment.php",
+        ],
+        [
+            // Add routes from userController and mount on user/
+            "mount" => "user",
+            "file" => __DIR__ . "/route/userController.php",
+        ],
+        [
             // Keep this last since its a catch all
             "mount" => null,
             "sort" => 999,

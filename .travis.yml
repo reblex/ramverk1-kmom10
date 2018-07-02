@@ -4,6 +4,9 @@ php:
     - "7.1"
 
 
+notifications:
+    email: false
+
 before_script:
     - make install
 

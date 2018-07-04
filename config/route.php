@@ -48,6 +48,11 @@ return [
             "file" => __DIR__ . "/route/postController.php",
         ],
         [
+            // Add routes from userController and mount on user/
+            "mount" => "tags",
+            "file" => __DIR__ . "/route/tagController.php",
+        ],
+        [
             // Keep this last since its a catch all
             "mount" => null,
             "sort" => 999,

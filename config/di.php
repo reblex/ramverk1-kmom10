@@ -126,6 +126,14 @@ return [
                 return $obj;
             }
         ],
+        "tagController" => [
+            "shared" => true,
+            "callback" => function () {
+                $obj = new reblex\Tag\TagController();
+                $obj->setDI($this);
+                return $obj;
+            }
+        ],
         "db" => [
             "shared" => true,
             "callback" => function () {

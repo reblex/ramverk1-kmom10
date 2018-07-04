@@ -9,6 +9,12 @@ return [
             "callable" => ["postController", "getIndex"],
         ],
         [
+            "info" => "All posts for specific tag.",
+            "requestMethod" => "get",
+            "path" => "tag/{name:alpha}",
+            "callable" => ["tagController", "getSpecific"],
+        ],
+        [
             "info" => "New Post.",
             "requestMethod" => "get|post",
             "path" => "new",

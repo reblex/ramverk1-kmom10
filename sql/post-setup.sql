@@ -12,5 +12,5 @@ CREATE TABLE `Post`
 INSERT INTO `Post` (`userId`, `datetime`, `content`) VALUES
     (1, "2018-06-29 18:44:12", "I think education is important! #education #government"),
     (2, "2018-06-30 12:20:01","I think #teslamotors is an **amazing** car company. They have really cool cars!"),
-    (3, "2018-06-30 13:01:34","We need less #government!")
+    (1, "2018-06-30 13:01:34","We need less #government!")
 ;

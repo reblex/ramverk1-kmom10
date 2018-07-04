@@ -1,3 +1,7 @@
+/*
+    Main style
+ */
+
 html {
     position: relative;
     min-height: 100%;
@@ -21,7 +25,6 @@ body {
     text-align: center;
 }
 
-
 footer {
     background-color: #F8F9FA;
     position: absolute;
@@ -31,6 +34,54 @@ footer {
     line-height: 60px;
     width: 100%;
     overflow: hidden;
-
     color: #909090;
+}
+
+/*
+    Posts
+ */
+
+.post {
+    position: relative;
+    border: solid 2px gray;
+    padding:10px;
+    max-width: 600px;
+    with: 600px;
+    min-height: 180px;
+    height: 120px;
+}
+
+.post .poster {
+    /* background-color: red; */
+    width: 20%;
+    height: 100%;
+    max-width: 115px;
+    max-height: 125px;
+    float: left;
+    clear: both;
+    border: 2px solid black;
+    margin: 0 10px 10px 0;
+}
+
+.posterImg {
+    margin: 6px auto;
+    float: none;
+    display: table;
+}
+
+.posterName {
+    clear: left;
+    float: left;
+    font-size:20px;
+    width: 100%;
+    text-align: center;
+}
+
+.postDetailPanel {
+    /* background-color: red; */
+    width: 90%;
+    height: 30px;
+    position: absolute;
+    bottom: 0;
+    margin-left: 2px;
 }

@@ -1,5 +1,3 @@
-USE anax;
-
 SET NAMES utf8;
 
 

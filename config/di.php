@@ -43,7 +43,7 @@ return [
             "callback" => function () {
                 $router = new \Anax\Route\Router();
                 $router->setDI($this);
-                $router->configure("route2.php");
+                $router->configure("route.php");
                 return $router;
             }
         ],
@@ -114,6 +114,14 @@ return [
             "shared" => true,
             "callback" => function () {
                 $obj = new reblex\Comment\CommentController();
+                $obj->setDI($this);
+                return $obj;
+            }
+        ],
+        "postController" => [
+            "shared" => true,
+            "callback" => function () {
+                $obj = new reblex\Post\PostController();
                 $obj->setDI($this);
                 return $obj;
             }

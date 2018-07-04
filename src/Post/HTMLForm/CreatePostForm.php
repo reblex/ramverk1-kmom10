@@ -103,7 +103,10 @@ class CreatePostForm extends FormModel
         $post->setDb($this->di->get("db"));
         $post->userId  = $this->form->value("userId");
         $post->content = $this->form->value("content");
-        $post->dateTime = date("Y-m-d H:i:s");
+
+        $dt = new \DateTime("now", new \DateTimeZone('Europe/Stockholm'));
+        $post->datetime = $dt->format("Y-m-d H:i:s");
+
         $post->save();
 
         // Get the post to find generated ID.

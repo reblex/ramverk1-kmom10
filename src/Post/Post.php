@@ -14,6 +14,6 @@ class Post extends ActiveRecordModel
 
     public $id;
     public $userId;
-    public $dateTime;
+    public $datetime;
     public $content;
 }

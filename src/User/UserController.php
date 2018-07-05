@@ -90,33 +90,40 @@ class UserController implements
         $user->setDb($this->di->get("db"));
         $user->find("username", $name);
 
+        // Get all posts related with userId
         $userPosts = new Post();
         $userPosts->setDb($this->di->get("db"));
         $userPosts = $userPosts->findAllWhere("userId = ?", $user->id);
 
-        $comments = new Comment();
-        $comments->setDb($this->di->get("db"));
-        $comments = $comments->findAllWhere("userId = ?", $user->id);
-
-
+        // Save array of postIds for all posts from above
         $userPostIds = [];
         foreach ($userPosts as $post) {
             array_push($userPostIds, $post->id);
         }
 
-        $commentPostIds = [];
+        // Get all comments with userId
+        $comments = new Comment();
+        $comments->setDb($this->di->get("db"));
+        $comments = $comments->findAllWhere("userId = ?", $user->id);
 
+        // if comments postId isn't already in $userPostIds, add it
+        // to this array to select all related posts not already found.
+        $commentPostIds = [];
         foreach ($comments as $comment) {
             // if the post is't already fetched in userPosts...
-            if (in_array($comment->id, $userPostIds) == false) {
+            if (in_array($comment->postId, $userPostIds) == false) {
                 array_push($commentPostIds, $comment->postId);
+                array_push($userPostIds, $comment->postId);
             }
-
         }
 
-        $relatedPosts = new Post();
-        $relatedPosts->setDb($this->di->get("db"));
-        $relatedPosts = $relatedPosts->findAllWhere("id = ?", $commentPostIds);
+        $relatedPost = new Post();
+        $relatedPost->setDb($this->di->get("db"));
+
+        $relatedPosts = [];
+        foreach ($commentPostIds as $id) {
+            array_push($relatedPosts, $relatedPost->find("id", $id));
+        }
 
         $posts = array_merge($userPosts, $relatedPosts);
 

@@ -24,7 +24,9 @@
 </div>
 
 <br><br>
-<h2>Posts related to <?= $user->username ?></h2>
+<h2>Post activity</h2>
+<i>These posts are either posted by or commented on by <?= $user->username ?>.</i>
+<br><br>
 
 <br>
 

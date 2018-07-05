@@ -23,6 +23,10 @@ $navItems = [
 ];
 ?>
 
+<?php
+$baseRoute = explode("/", $this->di->get("request")->getRoute(), 2)[0];
+?>
+
 <div class="container">
 
 <div class="header">
@@ -35,13 +39,15 @@ $navItems = [
         <div class="collapse navbar-collapse" id="containerNavbar">
             <ul class="navbar-nav mr-auto">
             <?php foreach($navItems as $item): ?>
+
             <li class="nav-item">
-                <a class="nav-link <?= $this->di->get("request")->getRoute() == $item["route"] ? "active" : "" ?>" href="<?= $this->di->get("url")->create($item["route"]) ?>"><?= $item["title"] ?></a>
+                <a class="nav-link <?= $baseRoute == $item["route"] ? "active" : "" ?>" href="<?= $this->di->get("url")->create($item["route"]) ?>"><?= $item["title"] ?></a>
             </li>
             <?php endforeach; ?>
             </ul>
             <ul class="navbar-nav navbar-right">
-                <li><a class="nav-orange nav-link <?= $this->di->get("request")->getRoute() == $item["route"] ? "active" : "" ?>" href="<?= $this->di->get("url")->create("user")?>">User</a></li>
+
+                <li><a class="nav-orange nav-link <?= $baseRoute == $item["route"] ? "active" : "" ?>" href="<?= $this->di->get("url")->create("user")?>">User</a></li>
             </ul>
         </div>
     </nav>

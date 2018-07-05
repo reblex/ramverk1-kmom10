@@ -16,15 +16,15 @@ return [
         ],
         [
             "info" => "New Comment",
-            "requestMethod" => "get",
+            "requestMethod" => "get|post",
             "path" => "{postId:digit}/comment",
             "callable" => ["postController", "getPostNewComment"],
         ],
         [
             "info" => "New subcomment",
-            "requestMethod" => "get",
+            "requestMethod" => "get|post",
             "path" => "{postId:digit}/comment/{parentId:digit}",
-            "callable" => ["postController", "getPostNewSubComment"],
+            "callable" => ["postController", "getPostNewComment"],
         ],
         [
             "info" => "All posts for specific tag.",

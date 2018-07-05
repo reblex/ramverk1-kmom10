@@ -85,6 +85,11 @@ footer {
     margin-left: 18px;
 }
 
+.postTextArea {
+    min-width: 480px;
+    min-height: 250px;
+}
+
 /*
     Comments
 */
@@ -98,6 +103,17 @@ footer {
     border-left: 1px solid gray;
     padding-left: 10px;
     margin-left: 15px;
+}
+
+
+.subReplyLink {
+    margin-left: 10px;
+    font-size: 15px;
+}
+
+.commentTextArea {
+    min-width: 360px;
+    min-height: 100px;
 }
 
 /*

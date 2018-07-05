@@ -4,9 +4,10 @@ namespace Anax\View;
 use \reblex\User\User;
 
 $allPostsUrl = $this->di->get("url")->create("posts");
+$post = $data["post"];
 ?>
 
-<h1><u>Post #<?= $data["post"]->id ?></u></h1>
+<h1><u>Post #<?= $post->id ?></u></h1>
 <br><br>
 
 <a href='<?= $allPostsUrl ?>'>< Back to ALL posts</a>
@@ -14,12 +15,12 @@ $allPostsUrl = $this->di->get("url")->create("posts");
 
 <?php
 
-$data["post"]->printPostHTML($this->di);
+$post->printPostHTML($this->di);
 
 echo("<br/><br/>");
 
 if ($data["currentAccount"] != "") {
-    $newCommentUrl = url("posts/new");
+    $newCommentUrl = url("posts/$post->id/comment");
     echo("<a href='$newCommentUrl'>Reply to this Post</a>");
 } else {
     $loginUrl = url("user/login");
@@ -44,6 +45,9 @@ if (count($data["comments"]) == 0) {
     $user->setDb($this->di->get("db"));
     $user->find("id", $branch[0]->userId);
     $userUrl = $this->di->get("url")->create("users/$user->username");
+    $postId = $post->id;
+    $parentCommentId = $branch[0]->id;
+    $commentUrl = $this->di->get("url")->create("posts/$postId/comment/$parentCommentId");
     ?>
     <div class="tree">
         <div class="postResponse comment">
@@ -62,9 +66,10 @@ if (count($data["comments"]) == 0) {
                 <i><a href="<?=$userUrl?>"><?= $user->username ?></a></i>
                 <?= $this->di->get("textfilter")->parse($subComment->content, ["markdown"])->text ?>
             </div>
-
         <?php endforeach; ?>
         </div>
     </div>
+    <i><a class="subReplyLink" href="<?=$commentUrl?>">Reply</a></i>
+    <br><br><br>
 
 <?php endforeach; ?>

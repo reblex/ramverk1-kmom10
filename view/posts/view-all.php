@@ -27,34 +27,7 @@ echo "<br/><br/>";
 <img src="" alt="">
 <?php
 foreach ($data["posts"] as $post) {
-    $poster = new User();
-    $poster->setDb($this->di->get("db"));
-    $poster->find("id", $post->userId);
-
-    $default = "https://www.gravatar.com/avatar/";
-    $size = 40;
-    $grav_url = "https://www.gravatar.com/avatar/" . md5(strtolower(trim($poster->email))) . "?d=" . urlencode($default) . "&s=" . $size;
-    $username = $poster->username == null ? "(Removed account)" : $poster->username;
-
-    $userBaseUrl = $this->di->get("url")->create("users");
-
-    echo("<div class='post'><div class='poster'><img class='posterImg' src='$grav_url'/><a class='posterName' href='{$userBaseUrl}/$username'>$username</a></div><div class='postText'");
-
-    // find hashtags and convert them to links
-    $text = $this->di->get("textfilter")->parse($post->content, ["markdown"])->text;
-    $tagBaseUrl = $this->di->get("url")->create("posts/tag");
-
-    $text = preg_replace("/(?:\s|[\.\!\?]+)\#([A-z]+)/", "<a href='{$tagBaseUrl}/$1'> #$1</a>", $text);
-
-    echo("<p style='font-size:20px'>$text</p>");
-
-
-    echo("</div>");
-    echo("<div class='postDetailPanel'>");
-
-    $commentUrl = $this->di->get("url")->create("posts/$post->id");
-    echo("<a href='$commentUrl'>Comments</a> ");
-    echo("</div></div></div");
-    echo("<br/><br/>");
+    $post->printPostHTML($this->di, true);
+    echo("<br><br>");
 }
 ?>

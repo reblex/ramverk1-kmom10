@@ -6,6 +6,9 @@ use \Anax\Configure\ConfigureInterface;
 use \Anax\Configure\ConfigureTrait;
 use \Anax\DI\InjectionAwareInterface;
 use \Anax\Di\InjectionAwareTrait;
+use \reblex\Post\Post;
+use \reblex\User\User;
+use \reblex\Comment\Comment;
 use \Anax\User\HTMLForm\UserLoginForm;
 use \Anax\User\HTMLForm\EditUserForm;
 use \Anax\User\HTMLForm\CreateUserForm;
@@ -73,6 +76,56 @@ class UserController implements
         ];
 
         $view->add("users/view-all", $data);
+
+        $pageRender->renderPage(["title" => $title]);
+    }
+
+    public function getSpecificUser($name)
+    {
+        $title      = $name;
+        $view       = $this->di->get("view");
+        $pageRender = $this->di->get("pageRender");
+
+        $user = new User();
+        $user->setDb($this->di->get("db"));
+        $user->find("username", $name);
+
+        $userPosts = new Post();
+        $userPosts->setDb($this->di->get("db"));
+        $userPosts = $userPosts->findAllWhere("userId = ?", $user->id);
+
+        $comments = new Comment();
+        $comments->setDb($this->di->get("db"));
+        $comments = $comments->findAllWhere("userId = ?", $user->id);
+
+
+        $userPostIds = [];
+        foreach ($userPosts as $post) {
+            array_push($userPostIds, $post->id);
+        }
+
+        $commentPostIds = [];
+
+        foreach ($comments as $comment) {
+            // if the post is't already fetched in userPosts...
+            if (in_array($comment->id, $userPostIds) == false) {
+                array_push($commentPostIds, $comment->postId);
+            }
+
+        }
+
+        $relatedPosts = new Post();
+        $relatedPosts->setDb($this->di->get("db"));
+        $relatedPosts = $relatedPosts->findAllWhere("id = ?", $commentPostIds);
+
+        $posts = array_merge($userPosts, $relatedPosts);
+
+        $data = [
+            "user" => $user,
+            "relatedPosts" => $posts
+        ];
+
+        $view->add("users/specific", $data);
 
         $pageRender->renderPage(["title" => $title]);
     }

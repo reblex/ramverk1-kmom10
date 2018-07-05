@@ -11,13 +11,13 @@ return [
             "callable" => ["userController", "getIndex"],
         ],
         [
-            "info" => "View all users, as regulare user",
+            "info" => "View all users, as regular user",
             "requestMethod" => "get",
             "path" => "users",
             "callable" => ["userController", "getAllUsers"],
         ],
         [
-            "info" => "View all users, as regulare user",
+            "info" => "View specific user, as regular user",
             "requestMethod" => "get",
             "path" => "users/{name:alpha}",
             "callable" => ["userController", "getSpecificUser"],

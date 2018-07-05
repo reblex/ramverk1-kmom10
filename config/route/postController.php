@@ -9,6 +9,24 @@ return [
             "callable" => ["postController", "getIndex"],
         ],
         [
+            "info" => "Specific post.",
+            "requestMethod" => "get",
+            "path" => "{postId:digit}",
+            "callable" => ["postController", "getSpecific"],
+        ],
+        [
+            "info" => "New Comment",
+            "requestMethod" => "get",
+            "path" => "{postId:digit}/comment",
+            "callable" => ["postController", "getPostNewComment"],
+        ],
+        [
+            "info" => "New subcomment",
+            "requestMethod" => "get",
+            "path" => "{postId:digit}/comment/{parentId:digit}",
+            "callable" => ["postController", "getPostNewSubComment"],
+        ],
+        [
             "info" => "All posts for specific tag.",
             "requestMethod" => "get",
             "path" => "tag/{name:alpha}",

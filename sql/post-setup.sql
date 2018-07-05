@@ -6,7 +6,7 @@ CREATE TABLE `Post`
     `id` INT AUTO_INCREMENT PRIMARY KEY NOT NULL,   -- Unique Post ID
     `userId` INT NOT NULL,                          -- ID of User who posted
     `datetime` DATETIME,                            -- Datetime posted
-    `content` VARCHAR(800)                          -- Post content
+    `content` VARCHAR(8000)                         -- Post content
 );
 
 INSERT INTO `Post` (`userId`, `datetime`, `content`) VALUES

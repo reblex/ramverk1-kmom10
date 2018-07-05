@@ -6,6 +6,7 @@ use \Anax\Configure\ConfigureInterface;
 use \Anax\Configure\ConfigureTrait;
 use \Anax\DI\InjectionAwareInterface;
 use \Anax\Di\InjectionAwareTrait;
+use \reblex\User\User;
 use \reblex\Tag\Tag;
 use \reblex\Post\Post;
 use \reblex\PostTag\PostTag;

@@ -14,5 +14,8 @@ CREATE TABLE `Comment`
 INSERT INTO `Comment` (`userId`, `postId`, `parentCommentId`, `content`) VALUES
     (1, 1, NULL, "I agree!"),
     (2, 2, NULL, "I would *LOVE* a tesla!."),
-    (1, 2, 2, "Who wouldn't?? :D")
+    (1, 2, 2, "Who wouldn't?? :D"),
+    (1, 2, NULL, "Model S is my favourite!"),
+    (2, 2, 3, "I know right :P")
+
 ;

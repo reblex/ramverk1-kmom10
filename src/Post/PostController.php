@@ -51,6 +51,77 @@ class PostController implements InjectionAwareInterface
         $pageRender->renderPage(["title" => $title]);
     }
 
+    /**
+     * Show all items.
+     *
+     * @return void
+     */
+    public function getSpecific($postId)
+    {
+        // Get the post, based on ID from url
+        $post = new Post();
+        $post->setDb($this->di->get("db"));
+        $post->find("id", $postId);
+
+        $title      = "Post $post->id";
+        $view       = $this->di->get("view");
+        $pageRender = $this->di->get("pageRender");
+
+        $account = $this->di->get("session")->get("account") ?: "";
+        $currentUserRights = "none";
+
+        // Comments will contain all commments related to the post
+        $comments = new Comment();
+        $comments->setDb($this->di->get("db"));
+        $comments = $comments->findAllWhere("postId = ?", $postId);
+
+
+
+        // Generate comment tree
+        $tree = array();
+        $rootComments = 0;
+        for ($i=0; $i < count($comments); $i++) {
+            // If comment has parent
+            if (isset($comments[$i]->parentCommentId)) {
+                // Find the parent location
+                for ($j=0; $j < count($tree); $j++) {
+                    if (isset($tree[$j][0])) {
+                        for ($k=0; $k < count($tree[$j]); $k++) {
+                            if ($tree[$j][$k]->id == $comments[$i]->parentCommentId) {
+                                // Add the comment to the parents array
+                                array_push($tree[$j], $comments[$i]);
+                                break;
+                            }
+                        }
+                    }
+                }
+            } else {
+                $tree[$rootComments] = array();
+                array_push($tree[$rootComments], $comments[$i]);
+                $rootComments++;
+            }
+        }
+
+        if ($account != "") {
+            $user = new User();
+            $user->setDb($this->di->get("db"));
+            $user->find("username", $account);
+            $currentUserRights = $user->admin == 1 ? "admin" : "user";
+        }
+
+        $data = [
+            "post" => $post,
+            "currentAccount" => $account,
+            "currentUserRights" => $currentUserRights,
+            "comments" => $tree
+        ];
+
+        $view->add("posts/specific", $data);
+
+        $pageRender->renderPage(["title" => $title]);
+    }
+
+
 
 
     /**

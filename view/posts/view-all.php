@@ -42,7 +42,7 @@ foreach ($data["posts"] as $post) {
 
     // find hashtags and convert them to links
     $text = $this->di->get("textfilter")->parse($post->content, ["markdown"])->text;
-    $tagBaseUrl = $this->di->get("url")->create("tags");
+    $tagBaseUrl = $this->di->get("url")->create("posts/tag");
 
     $text = preg_replace("/(?:\s|[\.\!\?]+)\#([A-z]+)/", "<a href='{$tagBaseUrl}/$1'> #$1</a>", $text);
 
@@ -54,12 +54,6 @@ foreach ($data["posts"] as $post) {
 
     $commentUrl = $this->di->get("url")->create("posts/$post->id");
     echo("<a href='$commentUrl'>Comments</a> ");
-    if ($data["currentAccount"] == $poster->username || $data["currentUserRights"] == "admin") {
-        $editUrl = url("comments/edit/$post->id");
-        $deleteUrl = url("comments/delete/$post->id");
-        echo(" | <a href='$editUrl'>Edit</a> | ");
-        echo("<a href='$deleteUrl'>Delete</a>");
-    }
     echo("</div></div></div");
     echo("<br/><br/>");
 }

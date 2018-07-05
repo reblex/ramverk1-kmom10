@@ -10,9 +10,12 @@ use \Anax\Database\ActiveRecordModel;
 class Comment extends ActiveRecordModel
 {
 
-    protected $tableName = "comments";
+    protected $tableName = "Comment";
 
     public $id;
     public $userId;
+    public $postId;
+    public $parentCommentId;
+    public $datetime;
     public $content;
 }

@@ -37,7 +37,7 @@ class UserController implements
             $this->di->get("response")->redirect("user/login");
         }
 
-        $title      = "Konto";
+        $title      = "My Account";
         $view       = $this->di->get("view");
         $pageRender = $this->di->get("pageRender");
 
@@ -54,6 +54,25 @@ class UserController implements
         ];
 
         $view->add("user/index", $data);
+
+        $pageRender->renderPage(["title" => $title]);
+    }
+
+    public function getAllUsers()
+    {
+        $title      = "Users";
+        $view       = $this->di->get("view");
+        $pageRender = $this->di->get("pageRender");
+
+        $user = new User();
+        $user->setDb($this->di->get("db"));
+
+
+        $data = [
+            "users" => $user->findAll(),
+        ];
+
+        $view->add("users/view-all", $data);
 
         $pageRender->renderPage(["title" => $title]);
     }

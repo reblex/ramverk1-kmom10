@@ -12,6 +12,10 @@ $navItems = [
             "title" => "Tags",
             "route" => "tags"
         ],
+        "users" => [
+            "title" => "Users",
+            "route" => "users"
+        ],
         "about" => [
             "title" => "About",
             "route" => "about"

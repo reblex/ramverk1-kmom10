@@ -36,7 +36,7 @@ foreach ($data["posts"] as $post) {
     $grav_url = "https://www.gravatar.com/avatar/" . md5(strtolower(trim($poster->email))) . "?d=" . urlencode($default) . "&s=" . $size;
     $username = $poster->username == null ? "(Removed account)" : $poster->username;
 
-    $userBaseUrl = $this->di->get("url")->create("user");
+    $userBaseUrl = $this->di->get("url")->create("users");
 
     echo("<div class='post'><div class='poster'><img class='posterImg' src='$grav_url'/><a class='posterName' href='{$userBaseUrl}/$username'>$username</a></div><div class='postText'");
 

@@ -39,7 +39,7 @@ return [
         ],
         [
             // Add routes from userController and mount on user/
-            "mount" => "user",
+            "mount" => null,
             "file" => __DIR__ . "/route/userController.php",
         ],
         [

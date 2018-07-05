@@ -87,7 +87,7 @@ footer {
 
 /*
     Comments
- */
+*/
 
 .tree {
     border-left: 1px solid gray;
@@ -98,4 +98,29 @@ footer {
     border-left: 1px solid gray;
     padding-left: 10px;
     margin-left: 15px;
+}
+
+/*
+    Users
+*/
+
+.listedUser {
+    border: 1px solid black;
+    max-width: 350px;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.listedUser img {
+    float: left;
+}
+
+.listedUser .userDetails {
+    float: left;
+    margin-left: 20px;
+}
+
+.usernameLink {
+    font-size: 30px;
+
 }

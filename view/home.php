@@ -6,7 +6,7 @@
     $tags  = $data["tags"];
 
     $default = "https://www.gravatar.com/avatar/";
-    $size = 40;
+    $size = 80;
     $baseUserUrl = $this->di->get("url")->create("users");
 ?>
 

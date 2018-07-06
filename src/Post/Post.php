@@ -24,7 +24,7 @@ class Post extends ActiveRecordModel
         $poster->find("id", $this->userId);
 
         $default = "https://www.gravatar.com/avatar/";
-        $size = 40;
+        $size = 80;
         $grav_url = "https://www.gravatar.com/avatar/" . md5(strtolower(trim($poster->email))) . "?d=" . urlencode($default) . "&s=" . $size;
         $username = $poster->username == null ? "(Removed account)" : $poster->username;
 

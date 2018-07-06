@@ -34,7 +34,7 @@ class Post extends ActiveRecordModel
 
         // find hashtags and convert them to links
         $text = $di->get("textfilter")->parse($this->content, ["markdown"])->text;
-        $tagBaseUrl = $di->get("url")->create("tags");
+        $tagBaseUrl = $di->get("url")->create("posts/tag");
 
         $text = preg_replace("/(?:\s|[\.\!\?]+)\#([A-z]+)/", "<a href='{$tagBaseUrl}/$1'> #$1</a>", $text);
 

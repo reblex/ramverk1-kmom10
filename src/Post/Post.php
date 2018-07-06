@@ -47,6 +47,7 @@ class Post extends ActiveRecordModel
             $commentUrl = $di->get("url")->create("posts/$this->id");
             echo("<a href='$commentUrl'>Comments</a> ");
         }
+        echo("<div class='postDate'>$this->datetime</div>");
         echo("</div></div></div");
     }
 }

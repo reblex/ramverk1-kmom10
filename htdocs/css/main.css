@@ -82,12 +82,16 @@ footer {
     height: 30px;
     position: absolute;
     bottom: 0;
-    margin-left: 18px;
+    margin-left: 10px;
 }
 
 .postTextArea {
     min-width: 480px;
     min-height: 250px;
+}
+
+.postDate {
+    float: right;
 }
 
 /*
@@ -139,4 +143,45 @@ footer {
 .usernameLink {
     font-size: 30px;
 
+}
+
+/*
+    Home
+*/
+
+.statWrapContainer {
+    width: 95%;
+    margin: auto;
+}
+
+.statContainer {
+    float: left;
+    width: 33%;
+    /* background-color: red; */
+}
+
+.statContainer h2 {
+    text-align: center;
+}
+
+.statUserContainer {
+    with: 100%;
+}
+
+.userHomeContainer {
+    max-width: 350px;
+    margin: auto;
+}
+
+.statUserContainer .userHomeContainer {
+    margin: auto;
+}
+
+.statPostContainer .post {
+    max-width: 530px;
+    margin: auto;
+}
+
+.statTagContainer {
+    text-align: center;
 }

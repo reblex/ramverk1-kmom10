@@ -150,5 +150,13 @@ return [
                 return $obj;
             }
         ],
+        "homeController" => [
+            "shared" => true,
+            "callback" => function () {
+                $obj = new \reblex\Home\HomeController();
+                $obj->setDI($this);
+                return $obj;
+            }
+        ],
     ],
 ];

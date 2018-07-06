@@ -13,6 +13,11 @@ return [
     // onto a base route.
     "routeFiles" => [
         [
+            // Add routes from userController and mount on user/
+            "mount" => "",
+            "file" => __DIR__ . "/route/other.php",
+        ],
+        [
             // These are for internal error handling and exceptions
             "mount" => null,
             "file" => __DIR__ . "/route/internal.php",
@@ -28,16 +33,6 @@ return [
             "file" => __DIR__ . "/route/debug.php",
         ],
         [
-            // To read flat file content in Markdown from content/
-            "mount" => null,
-            "file" => __DIR__ . "/route/flat-file-content.php",
-        ],
-        [
-            // To read flat file content in Markdown from content/
-            "mount" => null,
-            "file" => __DIR__ . "/route/comment.php",
-        ],
-        [
             // Add routes from userController and mount on user/
             "mount" => null,
             "file" => __DIR__ . "/route/userController.php",
@@ -51,6 +46,11 @@ return [
             // Add routes from userController and mount on user/
             "mount" => "tags",
             "file" => __DIR__ . "/route/tagController.php",
+        ],
+        [
+            // To read flat file content in Markdown from content/
+            "mount" => null,
+            "file" => __DIR__ . "/route/flat-file-content.php",
         ],
         [
             // Keep this last since its a catch all

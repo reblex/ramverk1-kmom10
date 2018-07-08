@@ -39,7 +39,7 @@ if (count($data["comments"]) == 0) {
 
 <br>
 
-<?php foreach($data["comments"] as $branch): ?>
+<?php foreach ($data["comments"] as $branch) : ?>
     <?php
     $user = new User;
     $user->setDb($this->di->get("db"));
@@ -55,7 +55,7 @@ if (count($data["comments"]) == 0) {
             <?= $this->di->get("textfilter")->parse($branch[0]->content, ["markdown"])->text ?>
         </div>
         <div class="subTree">
-        <?php foreach(array_slice($branch,1) as $subComment): ?>
+        <?php foreach (array_slice($branch, 1) as $subComment) : ?>
         <?php
             $user = new User;
             $user->setDb($this->di->get("db"));

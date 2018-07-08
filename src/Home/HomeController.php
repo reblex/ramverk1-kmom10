@@ -29,7 +29,7 @@ class HomeController implements InjectionAwareInterface
         $pageRender = $this->di->get("pageRender");
         $db = $this->di->get("db");
         $db->connect();
-        
+
 
         // Get the 3 latest posts
         $sql = "SELECT * FROM (
@@ -40,7 +40,7 @@ class HomeController implements InjectionAwareInterface
         // Get the ids of the latest posts.
         // Do it backwards so newest is on [0].
         $latestPostIds = [];
-        for ($i=count($latestPosts) - 1; $i >= 0 ; $i--) {
+        for ($i=count($latestPosts) - 1; $i >= 0; $i--) {
             array_push($latestPostIds, $latestPosts[$i]->id);
         }
 

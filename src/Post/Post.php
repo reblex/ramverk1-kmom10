@@ -18,19 +18,22 @@ class Post extends ActiveRecordModel
     public $datetime;
     public $content;
 
-    public function printPostHTML($di, $commentButton=false) {
+    public function printPostHTML($di, $commentButton = false)
+    {
         $poster = new User();
         $poster->setDb($di->get("db"));
         $poster->find("id", $this->userId);
 
         $default = "https://www.gravatar.com/avatar/";
         $size = 80;
-        $grav_url = "https://www.gravatar.com/avatar/" . md5(strtolower(trim($poster->email))) . "?d=" . urlencode($default) . "&s=" . $size;
+        $gravUrl = "https://www.gravatar.com/avatar/" . md5(strtolower(trim($poster->email)));
+        $gravUrl .= "?d=" . urlencode($default) . "&s=" . $size;
         $username = $poster->username == null ? "(Removed account)" : $poster->username;
 
         $userBaseUrl = $di->get("url")->create("user");
 
-        echo("<div class='post'><div class='poster'><img class='posterImg' src='$grav_url'/><a class='posterName' href='{$userBaseUrl}/$username'>$username</a></div><div class='postText'");
+        echo("<div class='post'><div class='poster'><img class='posterImg' src='$gravUrl'/>");
+        echo("<a class='posterName' href='{$userBaseUrl}/$username'>$username</a></div><div class='postText'");
 
         // find hashtags and convert them to links
         $text = $di->get("textfilter")->parse($this->content, ["markdown"])->text;

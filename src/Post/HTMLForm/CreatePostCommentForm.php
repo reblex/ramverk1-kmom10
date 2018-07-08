@@ -18,7 +18,7 @@ class CreatePostCommentForm extends FormModel
      *
      * @param Anax\DI\DIInterface $di a service container
      */
-    public function __construct(DIInterface $di, $user, $post, $parentCommentId=-1)
+    public function __construct(DIInterface $di, $user, $post, $parentCommentId = -1)
     {
         parent::__construct($di);
 
@@ -63,17 +63,16 @@ class CreatePostCommentForm extends FormModel
      */
     public function callbackSubmit()
     {
-        $db = $this->di->get("db");
-
-        $dt = new \DateTime("now", new \DateTimeZone('Europe/Stockholm'));
+        $date = new \DateTime("now", new \DateTimeZone('Europe/Stockholm'));
         $postId = $this->form->value("postId");
         $comment = new Comment();
         $comment->setDb($this->di->get("db"));
         $comment->userId = $this->form->value("userId");
         $comment->postId = $postId;
-        $comment->parentCommentId = $this->form->value("parentCommentId") == -1 ? NULL : $this->form->value("parentCommentId");
+        $pcid = $this->form->value("parentCommentId") == -1 ? null : $this->form->value("parentCommentId");
+        $comment->parentCommentId = $pcid;
 
-        $comment->datetime = $dt->format("Y-m-d H:i:s");
+        $comment->datetime = $date->format("Y-m-d H:i:s");
         $comment->content = $this->form->value("content");
 
         $comment->save();

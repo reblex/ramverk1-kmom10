@@ -51,6 +51,35 @@ class PostController implements InjectionAwareInterface
         $pageRender->renderPage(["title" => $title]);
     }
 
+    private function generateTree($comments)
+    {
+        // Generate comment tree
+        $tree = array();
+        $rootComments = 0;
+        for ($i=0; $i < count($comments); $i++) {
+            // If comment has parent
+            if (isset($comments[$i]->parentCommentId)) {
+                // Find the parent location
+                for ($j=0; $j < count($tree); $j++) {
+                    if (isset($tree[$j][0])) {
+                        for ($k=0; $k < count($tree[$j]); $k++) {
+                            if ($tree[$j][$k]->id == $comments[$i]->parentCommentId) {
+                                // Add the comment to the parents array
+                                array_push($tree[$j], $comments[$i]);
+                                break;
+                            }
+                        }
+                    }
+                }
+            } else {
+                $tree[$rootComments] = array();
+                array_push($tree[$rootComments], $comments[$i]);
+                $rootComments++;
+            }
+        }
+        return $tree;
+    }
+
     /**
      * Show all items.
      *
@@ -76,31 +105,8 @@ class PostController implements InjectionAwareInterface
         $comments = $comments->findAllWhere("postId = ?", $postId);
 
 
+        $tree = $this->generateTree($comments);
 
-        // Generate comment tree
-        $tree = array();
-        $rootComments = 0;
-        for ($i=0; $i < count($comments); $i++) {
-            // If comment has parent
-            if (isset($comments[$i]->parentCommentId)) {
-                // Find the parent location
-                for ($j=0; $j < count($tree); $j++) {
-                    if (isset($tree[$j][0])) {
-                        for ($k=0; $k < count($tree[$j]); $k++) {
-                            if ($tree[$j][$k]->id == $comments[$i]->parentCommentId) {
-                                // Add the comment to the parents array
-                                array_push($tree[$j], $comments[$i]);
-                                break;
-                            }
-                        }
-                    }
-                }
-            } else {
-                $tree[$rootComments] = array();
-                array_push($tree[$rootComments], $comments[$i]);
-                $rootComments++;
-            }
-        }
 
         if ($account != "") {
             $user = new User();
@@ -158,7 +164,7 @@ class PostController implements InjectionAwareInterface
         $pageRender->renderPage(["title" => $title]);
     }
 
-    public function getPostNewComment($postId, $parentId=-1)
+    public function getPostNewComment($postId, $parentId = -1)
     {
         // Render login page if not logged in.
         if (!$this->di->get("session")->has("account")) {
@@ -190,5 +196,4 @@ class PostController implements InjectionAwareInterface
 
         $pageRender->renderPage(["title" => $title]);
     }
-
 }

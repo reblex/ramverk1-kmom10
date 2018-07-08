@@ -105,8 +105,8 @@ class CreatePostForm extends FormModel
         $post->userId  = $this->form->value("userId");
         $post->content = $this->form->value("content");
 
-        $dt = new \DateTime("now", new \DateTimeZone('Europe/Stockholm'));
-        $post->datetime = $dt->format("Y-m-d H:i:s");
+        $date = new \DateTime("now", new \DateTimeZone('Europe/Stockholm'));
+        $post->datetime = $date->format("Y-m-d H:i:s");
 
         $post->save();
 

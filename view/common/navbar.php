@@ -38,7 +38,7 @@ $baseRoute = explode("/", $this->di->get("request")->getRoute(), 2)[0];
 
         <div class="collapse navbar-collapse" id="containerNavbar">
             <ul class="navbar-nav mr-auto">
-            <?php foreach($navItems as $item): ?>
+            <?php foreach ($navItems as $item) : ?>
 
             <li class="nav-item">
                 <a class="nav-link <?= $baseRoute == $item["route"] ? "active" : "" ?>" href="<?= $this->di->get("url")->create($item["route"]) ?>"><?= $item["title"] ?></a>

@@ -17,7 +17,7 @@
     <div class="statContainer statUserContainer">
         <h2>Top 3 most active Users</h2>
         <br>
-        <?php foreach($users as $user): ?>
+        <?php foreach ($users as $user) : ?>
         <?php
             $grav_url = "https://www.gravatar.com/avatar/" . md5(strtolower(trim($user->email))) . "?d=" . urlencode($default) . "&s=" . $size;
         ?>
@@ -46,7 +46,7 @@
     <div class="statContainer statTagContainer">
         <h2>Top 3 most popular Tags</h2>
         <br>
-        <?php foreach($tags as $tag): ?>
+        <?php foreach ($tags as $tag) : ?>
             <h3><a href='<?= $this->di->get('url')->create("posts/tag/$tag->name") ?>'>#<?= $tag->name ?></a></h3>
             <br>
         <?php endforeach; ?>

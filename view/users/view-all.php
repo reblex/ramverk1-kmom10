@@ -10,7 +10,7 @@
 <h1><u>Users</u></h1>
 <br><br>
 
-<?php foreach($users as $user): ?>
+<?php foreach ($users as $user) : ?>
 <?php
     $grav_url = "https://www.gravatar.com/avatar/" . md5(strtolower(trim($user->email))) . "?d=" . urlencode($default) . "&s=" . $size;
 ?>

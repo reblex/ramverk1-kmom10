@@ -33,7 +33,7 @@ class HomeController implements InjectionAwareInterface
 
         // Get the 3 latest posts
         $sql = "SELECT * FROM (
-                    SELECT * FROM Post ORDER BY `datetime` DESC LIMIT 3
+                    SELECT * FROM r1k10Post ORDER BY `datetime` DESC LIMIT 3
                 ) as r ORDER BY `datetime`";
         $latestPosts = $db->executeFetchAll($sql);
 
@@ -55,7 +55,7 @@ class HomeController implements InjectionAwareInterface
 
         // Get the 3 most popular tags
         $sql = "SELECT tagId, COUNT(*) AS magnitude
-                FROM PostTag
+                FROM r1k10PostTag
                 GROUP BY tagId
                 ORDER BY magnitude DESC
                 LIMIT 3";
@@ -70,18 +70,18 @@ class HomeController implements InjectionAwareInterface
         }
 
         // Get top 3 users with most combined Posts/Comments
-        $sql = "SELECT User.id, IFNULL(pCount, 0) + IFNULL(cCount, 0) AS count
-                FROM User
+        $sql = "SELECT r1k10User.id, IFNULL(pCount, 0) + IFNULL(cCount, 0) AS count
+                FROM r1k10User
                 LEFT JOIN(
                     SELECT userId, COUNT(*) as pCount
-                    FROM Post
+                    FROM r1k10Post
                     GROUP BY userId
-                ) posts ON User.id=posts.userId
+                ) posts ON r1k10User.id=posts.userId
                 LEFT JOIN(
                     SELECT userId, COUNT(*) as cCount
-                    FROM Comment
+                    FROM r1k10Comment
                     GROUP BY userId
-                ) comments ON User.id=comments.userId
+                ) comments ON r1k10User.id=comments.userId
                 ORDER BY count DESC LIMIT 3";
 
 

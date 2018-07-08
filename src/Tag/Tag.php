@@ -10,7 +10,7 @@ use \Anax\Database\ActiveRecordModel;
 class Tag extends ActiveRecordModel
 {
 
-    protected $tableName = "Tag";
+    protected $tableName = "r1k10Tag";
 
     public $id;
     public $name;

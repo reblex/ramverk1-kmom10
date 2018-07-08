@@ -11,7 +11,7 @@ use \reblex\User\User;
 class Post extends ActiveRecordModel
 {
 
-    protected $tableName = "Post";
+    protected $tableName = "r1k10Post";
 
     public $id;
     public $userId;

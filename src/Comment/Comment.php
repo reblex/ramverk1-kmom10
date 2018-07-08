@@ -10,7 +10,7 @@ use \Anax\Database\ActiveRecordModel;
 class Comment extends ActiveRecordModel
 {
 
-    protected $tableName = "Comment";
+    protected $tableName = "r1k10Comment";
 
     public $id;
     public $userId;

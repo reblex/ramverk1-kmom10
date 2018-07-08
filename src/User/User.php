@@ -12,7 +12,7 @@ class User extends ActiveRecordModel
     /**
      * @var string $tableName name of the database table.
      */
-    protected $tableName = "User";
+    protected $tableName = "r1k10User";
 
     /**
      * Columns in the table.

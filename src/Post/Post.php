@@ -30,7 +30,7 @@ class Post extends ActiveRecordModel
         $gravUrl .= "?d=" . urlencode($default) . "&s=" . $size;
         $username = $poster->username == null ? "(Removed account)" : $poster->username;
 
-        $userBaseUrl = $di->get("url")->create("user");
+        $userBaseUrl = $di->get("url")->create("users");
 
         echo("<div class='post'><div class='poster'><img class='posterImg' src='$gravUrl'/>");
         echo("<a class='posterName' href='{$userBaseUrl}/$username'>$username</a></div><div class='postText'");
